@@ -8,3 +8,29 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+:root {
+  /* 英語用フォントを先に書く */
+  --bs-body-font-family: 'Fredoka', 'Zen Maru Gothic', sans-serif;
+}
+
+body {
+  font-family: var(--bs-body-font-family);
+  /* 全体的に少し文字を太く*/
+  font-weight: 400; 
+  /* 読みやすさのために少し行間を広げる */
+  line-height: 1.7;
+}
+
+body {
+  letter-spacing: 0.03em;
+}
+
+  /*ロゴ用*/
+.site-logo {
+  font-family: 'Fredoka', cursive;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #FFFFFF; /* エンタメっぽい明るい色 */
+  text-decoration: none;
+}
