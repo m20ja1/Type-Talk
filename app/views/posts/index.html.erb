@@ -10,7 +10,6 @@
 <h4>投稿一覧</h4>
 <% @posts.each do |post| %>
   <%= post.title %>
-  <%= post.user.name %>
   <%= post.updated_at %>
   <%= link_to "詳細", post_path(post) %>
 <% end %>
