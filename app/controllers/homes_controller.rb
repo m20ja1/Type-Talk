@@ -3,6 +3,7 @@ class HomesController < ApplicationController
   allow_unauthenticated_access only: :top
 
   def top
-    @posts = Post.all.order(updated_at: :desc)
+    @posts = Post.all.order(created_at: :desc).limit(4)
+    
   end
 end

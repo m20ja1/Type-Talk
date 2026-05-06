@@ -31,6 +31,19 @@ body {
   font-family: 'Fredoka', cursive;
   font-weight: 700;
   font-size: 2rem;
-  color: #FFFFFF; /* エンタメっぽい明るい色 */
+  color: #FFFFFF; 
   text-decoration: none;
+}
+
+ /*投稿一覧用*/
+.custom-card {
+  height: 350px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background-color: white !important;
+
+.card-body-scroll {
+  flex-grow: 1;
+  overflow: hidden; /* 文字が溢れた場合に枠を突き破らないようにする */
+  /* もし枠内でスクロールさせたい場合は overflow-y: auto; に変更 */
 }

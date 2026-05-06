@@ -1,1 +1,19 @@
-users.show
+<h4>マイページ</h4>
+<% if Current.user == @user %>
+  <%= link_to "編集", edit_user_path(@user) %>
+<% end %>
+<br>
+
+<%= @user.name %><br>
+<%= @user.mbti_type %><br>
+<%= @user.introduction %><br>
+
+<br>
+<br>
+
+<h4>投稿一覧</h4>
+<% @user.posts.each do |post| %>
+  <%= post.title %><br>
+  <%= post.updated_at %>
+  <%= link_to "詳細", post_path(post) %><br>
+<% end %>

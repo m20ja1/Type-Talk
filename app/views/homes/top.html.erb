@@ -1,10 +1,43 @@
-<h3 style="color: #3585fe;">ABOUT</h3>
-<p>「自分を知り、世界を広げる。16タイプで紐解く新しい繋がり。」</p>
-<p>他では通じなかったあなたの本音、ここで話してみませんか？</p>
+<div class="card my-5">
+  <div class="card-header bg-transparent border-0 pt-4 pb-0 text-center">
+    <h2 class="h3 fw-bold" style="color: #4a4a4a;">ABOUT</h2>
+  </div>
+  <div class="card-body px-5 pb-5 text-center">
+    <p class="fs-5 text-secondary">
+      「自分を知り、世界を広げる。16タイプで紐解く新しい繋がり。」<br>
+      他では通じなかったあなたの本音、ここで話してみませんか？
+    </p>
+  </div>
+</div>
 
-<h3 style="color: #3585fe;">最新投稿</h3>
-<% @posts.each do |post| %>
-  <%= post.title %>
-  <%= post.updated_at %>
-  <%= link_to "詳細", post_path(post) %>
-<% end %>
+
+<div class="row row-cols-1 row-cols-md-4 g-4 text-start">
+  <% @posts.each do |post| %>
+    <div class="col">
+      <div class="card p-3 custom-card">
+        
+        <div class="d-flex align-items-center mb-2">
+          <i class="bi bi-person-circle fs-3 me-2"></i>
+          <div>
+            <strong class="d-block text-truncate" style="max-width: 120px;">
+              <%= post.title %>
+            </strong>
+            <small class="text-muted" style="font-size: 0.75rem;">
+              <%= post.created_at.strftime('%Y-%m-%d') %>
+            </small>
+          </div>
+        </div>
+        
+        <div class="card-body-scroll">
+          <p class="card-text small text-secondary">
+            <%= post.body.truncate(100) %> </p>
+        </div>
+
+        <div class="mt-3">
+          <%= link_to "詳細", post_path(post), class: "btn btn-sm btn-outline-secondary w-100" %>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
+</div>
