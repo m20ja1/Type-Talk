@@ -1,43 +1,42 @@
 <div class="card my-5">
   <div class="card-header bg-transparent border-0 pt-4 pb-0 text-center">
-    <h2 class="h3 fw-bold" style="color: #4a4a4a;">ABOUT</h2>
+    <h2 class="h3 section-title">ABOUT</h2>
   </div>
   <div class="card-body px-5 pb-5 text-center">
     <p class="fs-5 text-secondary">
-      「自分を知り、世界を広げる。16タイプで紐解く新しい繋がり。」<br>
+    
+    <i class="fa-solid fa-circle fa-xl" style="color: #9b72b0;"></i>
+    <i class="fa-solid fa-circle fa-xl" style="color: #33a474;"></i>
+    <i class="fa-solid fa-circle fa-xl" style="color: #2d7ebc;"></i>
+    <i class="fa-solid fa-circle fa-xl" style="color: #e4a025;"></i>
+    <br><br>
+    
+    「自分を知り、世界を広げる。16タイプで紐解く新しい繋がり。」<br>
       他では通じなかったあなたの本音、ここで話してみませんか？
     </p>
   </div>
 </div>
 
 
-<div class="row row-cols-1 row-cols-md-4 g-4 text-start">
-  <% @posts.each do |post| %>
-    <div class="col">
-      <div class="card p-3 custom-card">
-        
-        <div class="d-flex align-items-center mb-2">
-          <i class="bi bi-person-circle fs-3 me-2"></i>
-          <div>
-            <strong class="d-block text-truncate" style="max-width: 120px;">
-              <%= post.title %>
-            </strong>
-            <small class="text-muted" style="font-size: 0.75rem;">
-              <%= post.created_at.strftime('%Y-%m-%d') %>
-            </small>
-          </div>
-        </div>
-        
-        <div class="card-body-scroll">
-          <p class="card-text small text-secondary">
-            <%= post.body.truncate(100) %> </p>
-        </div>
-
-        <div class="mt-3">
-          <%= link_to "詳細", post_path(post), class: "btn btn-sm btn-outline-secondary w-100" %>
-        </div>
-
-      </div>
-    </div>
-  <% end %>
-</div>
+<%# 最新投稿 %>
+<h4><i class="fa-solid fa-bookmark"></i> New</h4>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>投稿日</th>
+      <th>MBTI</th>
+      <th>タイトル</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.updated_at.strftime("%m/%d") %></td>
+        <td><%= post.user.mbti_type %></td>
+        <td><%= post.title %></td>
+        <td><%= link_to "詳細ボタン", post_path(post), class: "btn btn-primary btn-sm" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

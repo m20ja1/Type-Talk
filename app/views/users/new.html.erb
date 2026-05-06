@@ -1,4 +1,7 @@
-<h2>新規登録</h2>
+
+<div class="container w-50 mx-auto p-5 mt-4 border border-secondary-subtle rounded-3">
+
+<h2>SignUp</h2>
 
 <%= form_with model: @user, url: users_path do |f| %>
   <% if @user.errors.any? %>
@@ -31,6 +34,7 @@
     <%= f.label :password_confirmation %><br>
     <%= f.password_field :password_confirmation %>
   </div>
+<br>
 
   <div class="actions">
     <%= f.submit "Sign up" %>
@@ -38,3 +42,4 @@
 <% end %>
 
 <%= link_to "ログインはこちら", new_session_path %>
+</div>

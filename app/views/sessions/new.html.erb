@@ -1,4 +1,5 @@
-<h2>ログイン</h2>
+<div class="container w-50 mx-auto p-5 mt-4 border border-secondary-subtle rounded-3">
+<h2>Login</h2>
 
 <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
 <%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
@@ -14,11 +15,12 @@
     <%= f.label :Password %><br>
     <%= f.password_field :password, required: true, autofocus: true,  autocomplete: "current-password" %>
   </div>
-
+<br>
   <%= f.submit "Login" %>
 <% end %>
-<br>
 
+パスワードをお忘れの方は<%= link_to "こちら", new_password_path %><br>
+ご登録がお済みでない方は<%= link_to "こちら", new_user_path %>
 
-<p>パスワードをお忘れの方は<%= link_to "こちら", new_password_path %></p>
-<p>ご登録がお済みでない方は<%= link_to "こちら", new_user_path %></p>
+</div>
+</div>
