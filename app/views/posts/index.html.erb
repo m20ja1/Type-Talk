@@ -7,9 +7,11 @@
   <%= f.submit "投稿" %>
 <% end %>
 
+<br><br>
+
 <h4>投稿一覧</h4>
 <% @posts.each do |post| %>
-  <%= post.title %>
+  <%= post.title %><br>
   <%= post.updated_at %>
-  <%= link_to "詳細", post_path(post) %>
+  <%= link_to "詳細", post_path(post) %><br><br><br>
 <% end %>

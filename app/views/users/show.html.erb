@@ -36,5 +36,5 @@
 <% @user.posts.each do |post| %>
   <%= post.title %><br>
   <%= post.updated_at %>
-  <%= link_to "詳細", post_path(post) %><br>
+  <%= link_to "詳細", post_path(post) %><br><br><br>
 <% end %>
