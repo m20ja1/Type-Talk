@@ -1,11 +1,26 @@
+<div class="container w-50 mx-auto p-5 mt-4 border border-secondary-subtle rounded-3">
+<h2>Login</h2>
+
 <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
 <%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
 
-<%= form_with url: session_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %><br>
-  <%= form.submit "Sign in" %>
-<% end %>
-<br>
+<%= form_with url: session_path do |f| %>
 
-<%= link_to "Forgot password?", new_password_path %>
+  <div class="field">
+    <%= f.label :Email_address %><br>
+    <%= f.email_field :email_address, required: true, autofocus: true,  autocomplete: "username", value: params[:email_address] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Password %><br>
+    <%= f.password_field :password, required: true, autofocus: true,  autocomplete: "current-password" %>
+  </div>
+<br>
+  <%= f.submit "Login" %>
+<% end %>
+
+パスワードをお忘れの方は<%= link_to "こちら", new_password_path %><br>
+ご登録がお済みでない方は<%= link_to "こちら", new_user_path %>
+
+</div>
+</div>
