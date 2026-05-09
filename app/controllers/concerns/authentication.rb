@@ -34,8 +34,9 @@ module Authentication
       redirect_to new_session_path
     end
 
+    #ログイン後はログインしているuserのマイページへ飛ぶ
     def after_authentication_url
-      session.delete(:return_to_after_authenticating) || root_url
+      session.delete(:return_to_after_authenticating) || user_path(Current.user)
     end
 
     def start_new_session_for(user)
