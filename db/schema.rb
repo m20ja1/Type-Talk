@@ -85,10 +85,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_09_063608) do
     t.string "email_address", null: false
     t.text "introduction"
     t.string "mbti_type"
-    t.string "name"
+    t.string "name", null: false
     t.string "password_digest", null: false
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
+    t.index ["mbti_type"], name: "index_users_on_mbti_type"
+    t.index ["name"], name: "index_users_on_name"
   end
 
   add_foreign_key "sessions", "users"
