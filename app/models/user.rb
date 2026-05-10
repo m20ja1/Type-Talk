@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
-   # アソシエーション
+  # アソシエーション
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -16,5 +16,4 @@ class User < ApplicationRecord
   # バリデーション
   validates :name, presence: true
   validates :email_address, presence: true, uniqueness: true
-  
 end

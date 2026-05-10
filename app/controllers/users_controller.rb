@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: %i[new create]
-  before_action :is_matching_login_user, only: [:edit, :update]
-  
+  before_action :is_matching_login_user, only: [ :edit, :update ]
+
   def index
     @users = User.all
   end
@@ -46,7 +46,7 @@ def create
   end
 
   private
- 
+
 def user_params
   params.require(:user).permit(:name, :email_address, :password, :password_confirmation, :mbti_type, :introduction)
 end
@@ -57,5 +57,4 @@ def is_matching_login_user
     redirect_to user_path(Current.user)
   end
 end
-
 end
