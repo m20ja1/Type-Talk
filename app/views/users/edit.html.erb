@@ -1,5 +1,18 @@
 <h4>プロフィール編集</h4>
 
+#バリデーションエラーメッセージ
+<% if @user.errors.any? %>
+  <div style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 20px;">
+    <h2><%= @user.errors.count %> 件のエラーにより、保存できませんでした：</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
 <%= form_with model: @user do |f| %>
   <%= f.label :name, "ニックネーム" %><br>
   <%= f.text_field :name %><br>
