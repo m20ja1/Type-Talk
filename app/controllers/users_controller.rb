@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: %i[new create]
+  before_action :is_matching_login_user, only: [:edit, :update]
   
   def index
     @users = User.all
@@ -41,13 +42,20 @@ def create
     @user = User.find(params[:id])
     @user.destroy
     terminate_session
-    redirect_to sign_up_path, notice: "退会が完了しました。"
+    redirect_to new_user_path, notice: "退会が完了しました。"
   end
 
   private
  
 def user_params
   params.require(:user).permit(:name, :email_address, :password, :password_confirmation, :mbti_type, :introduction)
+end
+
+def is_matching_login_user
+  user = User.find(params[:id])
+  unless user == Current.user
+    redirect_to user_path(Current.user)
+  end
 end
 
 end
