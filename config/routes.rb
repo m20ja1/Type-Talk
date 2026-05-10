@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # 認証（自動生成）
   resource :session
   resources :passwords, param: :token
@@ -14,6 +15,9 @@ Rails.application.routes.draw do
 
   # 投稿機能
   resources :posts
+
+  #検索機能
+  get "search" => "searches#search"
 
   get "up" => "rails/health#show", as: :rails_health_check
 end

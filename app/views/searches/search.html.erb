@@ -1,0 +1,57 @@
+<h2>検索結果 (<%= @range == 'User' ? 'ユーザー' : '投稿' %>)</h2>
+
+<% if @records.any? %>
+  <table border="1" style="border-collapse: collapse; width: 100%;">
+    
+    <% if @range == 'User' %>
+      <thead>
+        <tr>
+          <th>ユーザー名</th>
+          <th>MBTIタイプ</th>
+          <th>リンク</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @records.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.mbti_type %></td>
+            <td><%= link_to '詳細を見る', user_path(user) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+
+    <% else %>
+      <thead>
+        <tr>
+          <th>タイトル</th>
+          <th>本文</th>
+          <th>投稿者</th>
+          <th>リンク</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @records.each do |post| %>
+          <tr>
+            <td><%= post.title %></td>
+            <td><%= truncate(post.body, length: 30) %></td>
+            <td>
+              <% if post.user %>
+                <%= post.user.name %>
+              <% else %>
+                不明
+              <% end %>
+            </td>
+            <td><%= link_to '詳細を見る', post_path(post) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% end %>
+
+  </table>
+<% else %>
+  <p>一致する結果は見つかりませんでした。</p>
+<% end %>
+
+<br>
+<%= link_to '戻る', :back %>
