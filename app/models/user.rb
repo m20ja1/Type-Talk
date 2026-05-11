@@ -17,7 +17,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email_address, presence: true, uniqueness: true
 
-  # 検索機能
+    # 検索機能
     def self.looks(search, word)
       if search == "perfect_match"
         where("name = ? OR mbti_type = ?", word, word)

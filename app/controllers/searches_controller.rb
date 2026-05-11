@@ -12,5 +12,4 @@ class SearchesController < ApplicationController
       @records = Post.looks(@search, @word)
     end
   end
-
 end
