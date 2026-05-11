@@ -1,37 +1,67 @@
-<h4>投稿フォーム</h4>
-
-
-<% if @post.errors.any? %>
-  <div style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 20px;">
-    <h2><%= @post.errors.count %> 件のエラーにより、保存できませんでした：</h2>
-    <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      
+      <h2 class="h5 fw-bold mb-3">新規投稿</h2>
+      
+      <% if @post.errors.any? %>
+        <div class="alert alert-danger shadow-sm">
+          <h2 class="h6 fw-bold"><%= @post.errors.count %> 件のエラーがあります</h2>
+          <ul class="mb-0 small">
+            <% @post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-    </ul>
+
+      <div class="card border border-secondary-subtle p-4 shadow-sm mb-5">
+        <%= form_with model: @post do |f| %>
+          <div class="mb-3">
+            <%= f.label :title, "タイトル", class: "form-label fw-bold small" %>
+            <%= f.text_field :title, class: "form-control", placeholder: "タイトルを入力" %>
+          </div>
+          <div class="mb-3">
+            <%= f.label :body, "本文", class: "form-label fw-bold small" %>
+            <%= f.text_area :body, class: "form-control", rows: 4, placeholder: "どんなことを話したい？" %>
+          </div>
+          <div class="text-end">
+            <%= f.submit "投稿する", class: "btn btn-dark px-5 py-2" %>
+          </div>
+        <% end %>
+      </div>
+
+      <h2 class="h5 fw-bold mb-4">最新の投稿</h2>
+      
+      <div class="border-top border-secondary-subtle">
+        <% @posts.each do |post| %>
+          <div class="py-4 border-bottom">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h3 class="h6 fw-bold mb-1">
+                  <%= link_to post.title, post_path(post), class: "text-dark text-decoration-none" %>
+                </h3>
+                <div class="text-muted small mb-2">
+                  <%= post.updated_at.strftime('%Y/%m/%d %H:%M') %>
+                  <span class="mx-2">|</span>
+                  投稿者: 
+                  <% if post.user %>
+                    <%= link_to post.user.name, user_path(post.user), class: "text-secondary text-decoration-none fw-bold me-1" %>
+                    <%= render 'shared/mbti_badge', type: post.user.mbti_type %>
+                  <% else %>
+                    <span class="text-secondary">退会済みユーザー</span>
+                  <% end %>
+                </div>
+              </div>
+              <div>
+                <%= link_to "詳細へ", post_path(post), class: "btn btn-outline-secondary btn-sm rounded-pill px-3" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
   </div>
-<% end %>
-
-<%= form_with model: @post do |f| %>
-  <%= f.label :title, "タイトル" %><br>
-  <%= f.text_field :title %><br>
-  <%= f.label :body, "本文" %><br>
-  <%= f.text_area :body %><br> 
-  <%= f.submit "投稿" %>
-<% end %>
-
-<br><br>
-
-<h4>投稿一覧</h4>
-<% @posts.each do |post| %>
-<%= link_to post.title, post_path(post) %>　
-        投稿者: 
-    <% if post.user %>
-      <%= link_to post.user.name, user_path(post.user) %>
-    <% else %>
-      退会済みユーザー
-    <% end %>
-    <br>
-  <%= post.updated_at %><br><br><br>
-<% end %>
+</div>
 

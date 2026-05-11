@@ -16,4 +16,19 @@ class User < ApplicationRecord
   # バリデーション
   validates :name, presence: true
   validates :email_address, presence: true, uniqueness: true
+
+    # 検索機能
+    def self.looks(search, word)
+      if search == "perfect_match"
+        where("name = ? OR mbti_type = ?", word, word)
+      elsif search == "forward_match"
+        where("name LIKE ? OR mbti_type LIKE ?", "#{word}%", "#{word}%")
+      elsif search == "backward_match"
+          where("name LIKE ? OR mbti_type LIKE ?", "%#{word}", "%#{word}")
+      elsif search == "partial_match"
+          where("name LIKE ? OR mbti_type LIKE ?", "%#{word}%", "%#{word}%")
+      else
+          all
+      end
+    end
 end

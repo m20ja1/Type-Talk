@@ -1,42 +1,60 @@
-<div class="card my-5">
-  <div class="card-header bg-transparent border-0 pt-4 pb-0 text-center">
-    <h2 class="h3 section-title">ABOUT</h2>
+<div class="container mt-4">
+  <div class="card border border-secondary-subtle shadow-sm my-5">
+    <div class="card-header bg-transparent border-0 pt-5 pb-0 text-center">
+      <h2 class="h4 fw-bold">ABOUT</h2>
+    </div>
+    <div class="card-body px-4 pb-5 text-center">
+      <div class="mb-4">
+        <i class="fa-solid fa-circle fa-xl" style="color: #8E44AD;"></i>
+        <i class="fa-solid fa-circle fa-xl" style="color: #2ECC71;"></i>
+        <i class="fa-solid fa-circle fa-xl" style="color: #3498DB;"></i>
+        <i class="fa-solid fa-circle fa-xl" style="color: #F1C40F"></i>
+      </div>
+      <p class="fs-5 text-dark mb-2">
+        「自分を知り、世界を広げる。16タイプで紐解く新しい繋がり。」
+      </p>
+      <p class="text-secondary small">
+        他では通じなかったあなたの本音、ここで話してみませんか？
+      </p>
+    </div>
   </div>
-  <div class="card-body px-5 pb-5 text-center">
-    <p class="fs-5 text-secondary">
-    
-    <i class="fa-solid fa-circle fa-xl" style="color: #9b72b0;"></i>
-    <i class="fa-solid fa-circle fa-xl" style="color: #33a474;"></i>
-    <i class="fa-solid fa-circle fa-xl" style="color: #2d7ebc;"></i>
-    <i class="fa-solid fa-circle fa-xl" style="color: #e4a025;"></i>
-    <br><br>
-    
-    「自分を知り、世界を広げる。16タイプで紐解く新しい繋がり。」<br>
-      他では通じなかったあなたの本音、ここで話してみませんか？
-    </p>
+
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="d-flex align-items-center mb-4">
+        <i class="fa-solid fa-bookmark text-secondary me-2"></i>
+        <h4 class="h5 fw-bold mb-0">New Posts</h4>
+      </div>
+
+      <div class="border-top border-secondary-subtle">
+        <% @posts.each do |post| %>
+          <div class="py-3 border-bottom">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center flex-grow-1">
+                <div class="text-muted small me-3" style="min-width: 50px;">
+                  <%= post.updated_at.strftime("%m/%d") %>
+                </div>
+                
+                <div class="me-3">
+                  <%= render 'shared/mbti_badge', type: post.user.mbti_type %>
+                </div>
+
+                <div class="fw-bold">
+                  <%= link_to post.title, post_path(post), class: "text-dark text-decoration-none" %>
+                </div>
+              </div>
+
+              <div>
+                <%= link_to "詳細へ", post_path(post), class: "btn btn-link btn-sm text-secondary p-0 text-decoration-none fw-bold" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="text-center mt-5 mb-5">
+        <%= link_to "すべての投稿を見る", posts_path, class: "btn btn-outline-dark px-5" %>
+      </div>
+    </div>
   </div>
 </div>
-
-
-<%# 最新投稿 %>
-<h4><i class="fa-solid fa-bookmark"></i> New</h4>
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>投稿日</th>
-      <th>MBTI</th>
-      <th>タイトル</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.updated_at.strftime("%m/%d") %></td>
-        <td><%= post.user.mbti_type %></td>
-        <td><%= post.title %></td>
-        <td><%= link_to "詳細ボタン", post_path(post), class: "btn btn-primary btn-sm" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>

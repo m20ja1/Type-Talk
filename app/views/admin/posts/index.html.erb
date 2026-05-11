@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="h4 fw-bold mb-0">投稿一覧</h2>
+    <span class="badge bg-secondary"><%= @posts.count %> 件の投稿</span>
+  </div>
+
+  <div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th class="px-4">ID</th>
+            <th>投稿者</th>
+            <th>内容</th>
+            <th>投稿日</th>
+            <th class="text-center">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @posts.each do |post| %>
+            <tr>
+              <td class="px-4 text-muted small"><%= post.id %></td>
+              <td class="fw-bold">
+                <%= post.user.name %>
+              </td>
+              <td class="text-wrap" style="max-width: 400px;">
+                <%= truncate(post.body, length: 50) %>
+              </td>
+              <td class="small text-muted"><%= l post.created_at, format: :short %></td>
+              <td class="text-center">
+                <%= link_to "削除", admin_post_path(post), 
+                            data: { turbo_method: :delete, turbo_confirm: "この投稿を削除してもよろしいですか？" }, 
+                            class: "btn btn-outline-danger btn-sm rounded-pill px-3" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
