@@ -19,5 +19,10 @@ Rails.application.routes.draw do
   #検索機能
   get "search" => "searches#search"
 
+  #コメント機能
+  resources :posts do
+    resources :comments, only:[:create, :destroy]
+  end
+
   get "up" => "rails/health#show", as: :rails_health_check
 end
