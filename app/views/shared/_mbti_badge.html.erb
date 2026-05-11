@@ -1,0 +1,10 @@
+<% if type.present? %>
+  <span class="badge rounded-pill px-2 py-1" 
+        style="background-color: <%= mbti_color_class(type) %>; font-size: 0.75rem; color: #fff;">
+    <%= type %>
+  </span>
+<% else %>
+  <span class="badge rounded-pill px-2 py-1 bg-secondary opacity-50" style="font-size: 0.75rem;">
+    未設定
+  </span>
+<% end %>

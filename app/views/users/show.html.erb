@@ -1,17 +1,12 @@
 <div class="container mt-4">
-  <h2 class="h5 fw-bold">マイページ</h2>
 
-  <div class="card border border-secondary p-4 mb-5">
+  <div class="card border border-secondary-subtle p-4 mb-5 shadow-sm">
     <div class="d-flex align-items-center justify-content-between">
-      
       <div class="d-flex align-items-center">
-
         <div>
           <div class="d-flex align-items-center mb-2">
-            <h3 class="h4 fw-bold mb-0 me-2"><%= @user.name %></h3>
-            <span class="badge rounded-pill px-3 py-2" style="background-color: #9b72b0;">
-              <%= @user.mbti_type %>
-            </span>
+            <h3 class="h4 fw-bold mb-0 me-3"><%= @user.name %></h3>
+            <%= render 'shared/mbti_badge', type: @user.mbti_type %>
           </div>
           <p class="text-secondary mb-0">
             <%= @user.introduction %>
@@ -20,21 +15,36 @@
       </div>
 
       <% if Current.user == @user %>
-      <div class="align-self-start">
-        <%= link_to "編集", edit_user_path(@user), class: "btn btn-outline-secondary btn-sm px-3" %>
-      </div>
+        <div class="align-self-start">
+          <%= link_to "編集", edit_user_path(@user), class: "btn btn-outline-secondary btn-sm px-4" %>
+        </div>
       <% end %>
+    </div>
+  </div>
 
+<div class="row">
+    <div class="col-12"> 
+      <h4 class="h5 fw-bold mb-4">投稿一覧</h4>
+
+      <% if @user.posts.any? %>
+        <% @user.posts.each do |post| %>
+          <div class="py-3 border-bottom">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <div class="h6 fw-bold mb-1">
+                  <%= link_to post.title, post_path(post), class: "text-dark text-decoration-none" %>
+                </div>
+                <div class="text-muted small">
+                  <%= post.updated_at.strftime('%Y/%m/%d %H:%M') %>
+                </div>
+              </div>
+              <%= link_to "詳細へ", post_path(post), class: "btn btn-link btn-sm text-secondary p-0" %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="text-muted">まだ投稿がありません。</p>
+      <% end %>
     </div>
   </div>
 </div>
-
-<br>
-<br>
-
-<h4>投稿一覧</h4>
-<% @user.posts.each do |post| %>
-  <%= post.title %><br>
-  <%= post.updated_at %>
-  <%= link_to "詳細", post_path(post) %><br><br><br>
-<% end %>
