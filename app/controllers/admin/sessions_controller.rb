@@ -16,7 +16,6 @@ class Admin::SessionsController < Admin::ApplicationController
 
   def destroy
     terminate_admin_session
-    # ここを new_admin_session_path にしていることを確認
     redirect_to new_admin_session_path, notice: "ログアウトしました"
   end
 end
