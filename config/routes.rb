@@ -10,7 +10,12 @@ Rails.application.routes.draw do
   root "homes#top"
 
   # ユーザー(マイページ)
-  resources :users, only: [ :index, :show, :edit, :update, :destroy ]
+  resources :users, only: [ :index, :show, :edit, :update, :destroy ] do
+    member do
+      get :favorites
+    end
+  end
+
 
   # 投稿機能
   resources :posts
@@ -18,9 +23,10 @@ Rails.application.routes.draw do
   # 検索機能
   get "search" => "searches#search"
 
-  # コメント機能
+  # コメント機能・いいね機能
   resources :posts do
     resources :comments, only: [ :create, :destroy ]
+    resource :favorites, only: [:create, :destroy]
   end
 
   # 管理者用

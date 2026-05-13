@@ -1,5 +1,5 @@
 <div class="container mt-4">
-
+  <%# ユーザープロフィール部分 %>
   <div class="card border border-secondary-subtle p-4 mb-5 shadow-sm">
     <div class="d-flex align-items-center justify-content-between">
       <div class="d-flex align-items-center">
@@ -22,14 +22,16 @@
     </div>
   </div>
 
-<div class="row">
+  <div class="row">
     <div class="col-12"> 
       <h4 class="h5 fw-bold mb-4">投稿一覧</h4>
 
       <% if @user.posts.any? %>
         <% @user.posts.each do |post| %>
           <div class="py-3 border-bottom">
-            <div class="d-flex justify-content-between align-items-start">
+            <div class="d-flex justify-content-between align-items-center">
+              
+              <%# 左側：タイトルと日付 %>
               <div>
                 <div class="h6 fw-bold mb-1">
                   <%= link_to post.title, post_path(post), class: "text-dark text-decoration-none" %>
@@ -38,13 +40,21 @@
                   <%= post.updated_at.strftime('%Y/%m/%d %H:%M') %>
                 </div>
               </div>
-              <%= link_to "詳細へ", post_path(post), class: "btn btn-link btn-sm text-secondary p-0" %>
+
+              <%# 右側：いいねボタン ＋ 詳細リンク %>
+              <div class="d-flex align-items-center">
+                <div class="me-3">
+                <%= render 'favorites/btn', post: post %>
+                </div>
+                <%= link_to "詳細へ", post_path(post), class: "btn btn-link btn-sm text-secondary p-0" %>
+              </div>
+
             </div>
           </div>
-        <% end %>
+        <% end %> <%# each の終了 %>
       <% else %>
         <p class="text-muted">まだ投稿がありません。</p>
-      <% end %>
+      <% end %> <%# if @user.posts.any? の終了 %>
     </div>
   </div>
 </div>
