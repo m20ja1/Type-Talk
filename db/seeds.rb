@@ -81,4 +81,11 @@ comment_messages.each_with_index do |msg, i|
 end
 
 puts "コメントの作成が完了しました (計: #{Comment.count}件)"
+
+Admin.create!(
+  email_address: "admin@example.com",
+  password: "password",
+  password_confirmation: "password"
+)
+
 puts "すべてのSeedの実行が正常に完了しました！"
