@@ -12,6 +12,25 @@ class User < ApplicationRecord
   has_many :followings, through: :active_relationships, source: :followed
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_posts, through: :favorites, source: :post
+
+  # アソシエーション＜フォロー関連＞
+  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followings, through: :active_relationships, source: :followed
+
+  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :follower
+
+  # フォロー済みか判定するメソッド
+  def following?(other_user)
+    followings.include?(other_user)
+  end
+
+  # フォローしたユーザーの投稿を表示する
+  def feed
+    Post.where(user_id: following_ids).order(created_at: :desc)
+  end
 
   # バリデーション
   validates :name, presence: true

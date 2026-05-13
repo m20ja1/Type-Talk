@@ -45,6 +45,11 @@ def create
     redirect_to new_user_path, notice: "退会が完了しました。"
   end
 
+  def favorites
+    @user = User.find(params[:id])
+    @favorite_posts = @user.favorite_posts.order(created_at: :desc)
+  end
+
   private
 
 def user_params

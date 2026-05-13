@@ -1,0 +1,12 @@
+<%# app/views/favorites/_btn.html.erb %>
+<div class="favorite-button">
+  <% if post.favorited_by?(Current.user) %>
+    <%= link_to post_favorites_path(post), data: { turbo_method: :delete }, class: "text-decoration-none text-danger" do %>
+      <span class="h5">♥</span><span class="ms-1 small"><%= post.favorites.count %></span>
+    <% end %>
+  <% else %>
+    <%= link_to post_favorites_path(post), data: { turbo_method: :post }, class: "text-decoration-none text-secondary" do %>
+      <span class="h5">♡</span><span class="ms-1 small"><%= post.favorites.count %></span>
+    <% end %>
+  <% end %>
+</div>

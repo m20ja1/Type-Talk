@@ -13,7 +13,9 @@
             <%= render 'shared/mbti_badge', type: @post.user.mbti_type %>
           </span>
           <span><%= @post.updated_at.strftime('%Y/%m/%d %H:%M') %></span>
-        </div>
+          <span class="ms-2"><%= render 'favorites/btn', post: @post %></span>
+          </div>
+        
 
         <div class="card border border-secondary-subtle p-4 shadow-sm mb-3">
           <p class="mb-0" style="white-space: pre-wrap;"><%= @post.body %></p>

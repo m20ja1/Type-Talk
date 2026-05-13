@@ -6,6 +6,7 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
+  has_many :favorite
 
   # バリデーション
   validates :title, presence: true
@@ -24,5 +25,9 @@ class Post < ApplicationRecord
       else
         all
       end
+    end
+
+    def favorited_by?(user)
+      favorites.exists?(user_id: user.id)
     end
 end
