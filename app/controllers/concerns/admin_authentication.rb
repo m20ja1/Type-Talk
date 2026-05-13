@@ -13,7 +13,7 @@ module AdminAuthentication
 
     def authenticate_admin!
       unless resume_admin_session
-        redirect_to new_admin_session_path, alert: "管理者としてログインしてください"
+        redirect_to new_admin_session_path
       end
     end
 
