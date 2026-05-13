@@ -14,11 +14,15 @@
         </div>
       </div>
 
+    <div class="align-self-start d-flex align-items-center">
       <% if Current.user == @user %>
-        <div class="align-self-start">
-          <%= link_to "編集", edit_user_path(@user), class: "btn btn-outline-secondary btn-sm px-4" %>
-        </div>
+        <%= link_to "編集", edit_user_path(@user), class: "btn btn-outline-secondary btn-sm px-4" %>
+      <% else %>
+        <%# --- 他人のページならフォローボタンを表示 --- %>
+        <%= render 'relationships/follow_button', user: @user %>
       <% end %>
+    </div>
+    
     </div>
   </div>
 

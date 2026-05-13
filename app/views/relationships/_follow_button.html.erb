@@ -1,0 +1,9 @@
+<% if Current.user != user %>
+  <div id="follow_form">
+    <% if Current.user.following?(user) %>
+      <%= button_to "フォロー解除", relationship_path(Current.user.active_relationships.find_by(followed_id: user.id)), method: :delete, class: "btn btn-outline-secondary btn-sm" %>
+    <% else %>
+      <%= button_to "フォローする", relationships_path(followed_id: user.id), method: :post, class: "btn btn-danger btn-sm" %>
+    <% end %>
+  </div>
+<% end %>

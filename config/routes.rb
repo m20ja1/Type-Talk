@@ -13,8 +13,13 @@ Rails.application.routes.draw do
   resources :users, only: [ :index, :show, :edit, :update, :destroy ] do
     member do
       get :favorites
+      get :followings
+      get :followers
     end
   end
+
+  #フォロー機能
+  resources :relationships, only: [:create, :destroy]
 
 
   # 投稿機能
