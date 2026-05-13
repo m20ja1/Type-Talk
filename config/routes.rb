@@ -18,8 +18,8 @@ Rails.application.routes.draw do
     end
   end
 
-  #フォロー機能
-  resources :relationships, only: [:create, :destroy]
+  # フォロー機能
+  resources :relationships, only: [ :create, :destroy ]
 
 
   # 投稿機能
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   # コメント機能・いいね機能
   resources :posts do
     resources :comments, only: [ :create, :destroy ]
-    resource :favorites, only: [:create, :destroy]
+    resource :favorites, only: [ :create, :destroy ]
   end
 
   # 管理者用
