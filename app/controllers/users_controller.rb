@@ -23,6 +23,11 @@ def create
 
   def show
     @user = User.find(params[:id])
+    if @user == Current.user
+      @posts = @user.feed
+    else
+      @posts = @user.posts.order(created_at: :desc)
+    end
   end
 
   def edit
@@ -48,6 +53,18 @@ def create
   def favorites
     @user = User.find(params[:id])
     @favorite_posts = @user.favorite_posts.order(created_at: :desc)
+  end
+
+  def followings
+    @user = User.find(params[:id])
+    @users = @user.followings.order(created_at: :desc)
+    render "show_follow"
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers.order(created_at: :desc)
+    render "show_follow"
   end
 
   private

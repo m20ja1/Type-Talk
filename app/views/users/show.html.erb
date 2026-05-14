@@ -11,6 +11,19 @@
           <p class="text-secondary mb-0">
             <%= @user.introduction %>
           </p>
+
+          <%# --- フォロー数・フォロワー数表示 --- %>
+          <div class="d-flex gap-3 mt-3">
+            <%= link_to followings_user_path(@user), class: "text-decoration-none text-dark small" do %>
+              <span class="fw-bold"><%= @user.followings.count %></span>
+              <span class="text-muted">フォロー</span>
+            <% end %>
+            <%= link_to followers_user_path(@user), class: "text-decoration-none text-dark small" do %>
+              <span class="fw-bold"><%= @user.followers.count %></span>
+              <span class="text-muted">フォロワー</span>
+            <% end %>
+          </div>
+
         </div>
       </div>
 
@@ -26,39 +39,39 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-12"> 
-      <h4 class="h5 fw-bold mb-4">投稿一覧</h4>
+<h4 class="h5 fw-bold mb-4">
+  <%= @user == Current.user ? "タイムライン" : "投稿一覧" %>
+</h4>
 
-      <% if @user.posts.any? %>
-        <% @user.posts.each do |post| %>
-          <div class="py-3 border-bottom">
-            <div class="d-flex justify-content-between align-items-center">
-              
-              <%# 左側：タイトルと日付 %>
-              <div>
-                <div class="h6 fw-bold mb-1">
-                  <%= link_to post.title, post_path(post), class: "text-dark text-decoration-none" %>
-                </div>
-                <div class="text-muted small">
-                  <%= post.updated_at.strftime('%Y/%m/%d %H:%M') %>
-                </div>
-              </div>
-
-              <%# 右側：いいねボタン ＋ 詳細リンク %>
-              <div class="d-flex align-items-center">
-                <div class="me-3">
-                <%= render 'favorites/btn', post: post %>
-                </div>
-                <%= link_to "詳細へ", post_path(post), class: "btn btn-link btn-sm text-secondary p-0" %>
-              </div>
-
+<% if @posts.any? %>
+  <% @posts.each do |post| %>
+    <div class="py-3 border-bottom">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <%# タイムラインでは「誰の投稿か」が重要なので、投稿者名を追加します %>
+          <% if @user == Current.user %>
+            <div class="small text-muted mb-1">
+              <%= post.user.name %>
             </div>
+          <% end %>
+          
+          <div class="h6 fw-bold mb-1">
+            <%= link_to post.title, post_path(post), class: "text-dark text-decoration-none" %>
           </div>
-        <% end %> <%# each の終了 %>
-      <% else %>
-        <p class="text-muted">まだ投稿がありません。</p>
-      <% end %> <%# if @user.posts.any? の終了 %>
+          <div class="text-muted small">
+            <%= post.updated_at.strftime('%Y/%m/%d %H:%M') %>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center">
+          <div class="me-3">
+            <%= render 'favorites/btn', post: post %>
+          </div>
+          <%= link_to "詳細へ", post_path(post), class: "btn btn-outline-secondary btn-sm rounded-pill px-3" %>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  <% end %>
+<% else %>
+  <p class="text-muted">表示する投稿がありません。</p>
+<% end %>
