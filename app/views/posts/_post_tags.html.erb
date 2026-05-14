@@ -1,0 +1,7 @@
+<% post.tags.each do |tag| %>
+  <%= link_to posts_path(tag_id: tag.id), class: "text-decoration-none" do %>
+     <span class="badge bg-light text-secondary border fw-normal me-1">
+       #<%= tag.name %>
+      </span>
+  <% end %>
+<% end %>

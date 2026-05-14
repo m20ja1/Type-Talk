@@ -2,7 +2,12 @@ class PostsController < ApplicationController
   before_action :is_matching_login_user, only: [ :edit, :update, :destroy ]
 
   def index
-    @posts = Post.all.order(updated_at: :desc)
+    if params[:tag_id].present?
+      @tag = Tag.find(params[:tag_id])
+      @posts = @tag.posts.order(updated_at: :desc)
+    else
+      @posts = Post.all.order(updated_at: :desc)
+    end
     @post = Post.new
   end
 
@@ -13,6 +18,9 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = Current.user.id
     if @post.save
+      if params[:post][:tag_list].present?
+        @post.save_tags(params[:post][:tag_list])
+      end
       redirect_to posts_path
     else
       @posts = Post.all.order(updated_at: :desc)
@@ -48,7 +56,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, :tag_list)
   end
 
   def is_matching_login_user

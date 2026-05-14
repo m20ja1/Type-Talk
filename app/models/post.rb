@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  attr_accessor :tag_list
+
   belongs_to :user
   # ジャンル追加したら「oputional:true」を削除
   belongs_to :genre, optional: true
@@ -27,7 +29,21 @@ class Post < ApplicationRecord
       end
     end
 
+    # いいね機能
     def favorited_by?(user)
+      return false if user.nil?
       favorites.exists?(user_id: user.id)
+    end
+
+    # タグ検索
+    def save_tags(tag_names)
+      return if tag_names.nil?
+
+      tag_list = tag_names.split(",").map(&:strip).uniq
+      self.tags.clear
+      tag_list.each do |name|
+        tag = Tag.find_or_create_by(name: name)
+        self.tags << tag
+      end
     end
 end
