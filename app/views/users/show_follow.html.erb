@@ -1,0 +1,33 @@
+<h2 class="h5 fw-bold mb-4">
+        <%= action_name == 'followings' ? 'フォロー中' : 'フォロワー' %> (<%= @users.count %>)
+      </h2>
+
+      <% if @users.any? %>
+        <div class="list-group shadow-sm">
+          <% @users.each do |user| %>
+            <div class="list-group-item p-3 border-secondary-subtle">
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                  <div class="me-3">
+                    <h5 class="mb-1 fw-bold">
+                      <%= link_to user.name, user_path(user), class: "text-dark text-decoration-none" %>
+                      <%= render 'shared/mbti_badge', type: user.mbti_type %>
+                    </h5>
+                  </div>
+                </div>
+
+                <%# フォローボタンのパーシャルを再利用 %>
+                <div>
+                  <%= render 'relationships/follow_button', user: user %>
+                </div>
+              </div>
+              <p class="text-secondary small mb-0 mt-2"><%= user.introduction %></p>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-muted text-center py-5">まだ誰もいません。</p>
+      <% end %>
+    </div>
+  </div>
+</div>

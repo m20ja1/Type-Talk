@@ -29,7 +29,8 @@ class User < ApplicationRecord
 
   # フォローしたユーザーの投稿を表示する
   def feed
-    Post.where(user_id: following_ids).order(created_at: :desc)
+    following_ids_inclusive = following_ids << id
+    Post.where(user_id: following_ids_inclusive).order(created_at: :desc)
   end
 
   # バリデーション
