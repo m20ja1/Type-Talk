@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_11_105010) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_17_034455) do
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email_address"
@@ -38,6 +38,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_11_105010) do
     t.string "name"
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_genres_on_name"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "notifiable_id", null: false
+    t.string "notifiable_type", null: false
+    t.boolean "read", default: false, null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "post_tags", force: :cascade do |t|
@@ -95,6 +106,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_11_105010) do
     t.index ["name"], name: "index_users_on_name"
   end
 
+  add_foreign_key "notifications", "users"
   add_foreign_key "sessions", "admins"
   add_foreign_key "sessions", "users"
 end

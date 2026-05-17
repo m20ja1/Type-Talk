@@ -50,8 +50,11 @@
             <span><i class="fa-solid fa-fire-flame-simple"></i>Type-Talk</span>
             <% end %>
 
+            
+
         <div class="d-flex flex-column align-items-end">
-          <div class="d-flex gap-2 mb-2">
+          <div class="d-flex gap-2 mb-2 align-items-center">
+            <%= render 'layouts/notifications_link' %>
             <% if authenticated? %>
               <%= link_to "Profile", user_path(Current.user), class: "btn btn-light btn-sm px-3" %>
               <%= link_to "Users", users_path, class: "btn btn-light btn-sm px-3" %>

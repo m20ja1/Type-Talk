@@ -1,0 +1,51 @@
+<% if current_user %>
+  <li class="nav-item dropdown d-inline-block ms-2"> <%# 他のボタンとの間隔を調整 %>
+    <%= link_to "#", 
+        class: "btn btn-outline-dark dropdown-toggle position-relative", 
+        id: "navbarDropdown", 
+        role: "button", 
+        data: { bs_toggle: "dropdown", turbo: false }, 
+        aria_expanded: "false" do %>
+      
+      <i class="fa-solid fa-bell fa-xs " style="color: rgb(255, 212, 59);"></i> News
+
+      <% count = current_user.notifications.where(read: false).count %>
+      <% if count > 0 %>
+        <%# バッジをボタンの右上に少し被せる調整 %>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          <%= count %>
+        </span>
+      <% end %>
+    <% end %>
+
+    <ul class="dropdown-menu dropdown-menu-end shadow mt-2" aria-labelledby="navbarDropdown" style="min-width: 300px;">
+      <li class="dropdown-header border-bottom py-2">
+        直近5件の未読通知
+      </li>
+      
+      <% notifications = current_user.notifications.where(read: false).order(created_at: :desc).limit(5) %>
+      
+      <% if notifications.any? %>
+        <% notifications.each do |notification| %>
+          <li>
+            <%= link_to post_path(notification.notifiable), class: "dropdown-item py-2 border-bottom", style: "white-space: normal;" do %>
+              <% if notification.notifiable_type == "Post" %>
+                <small class="d-block">
+                  <strong><%= notification.notifiable.user.name %></strong>さんが投稿しました
+                </small>
+                <div class="text-truncate" style="max-width: 250px;"><%= notification.notifiable.title %></div>
+              <% end %>
+              <div class="text-muted" style="font-size: 0.75rem;"><%= time_ago_in_words(notification.created_at) %>前</div>
+            <% end %>
+          </li>
+        <% end %>
+      <% else %>
+        <li><div class="dropdown-item text-muted py-3 text-center">新しい通知はありません</div></li>
+      <% end %>
+
+      <li>
+        <%= link_to "全ての通知を見る", notifications_path, class: "dropdown-item text-center small text-primary py-2" %>
+      </li>
+    </ul>
+  </li>
+<% end %>

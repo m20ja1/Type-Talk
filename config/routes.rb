@@ -49,6 +49,9 @@ Rails.application.routes.draw do
     resources :posts, only: [ :index, :destroy ]
   end
 
+  # 通知機能
+  resources :notifications, only: [ :index, :update ]
+
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
