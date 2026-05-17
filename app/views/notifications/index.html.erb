@@ -4,31 +4,44 @@
   <div class="list-group shadow-sm">
     <% if @notifications.any? %>
       <% @notifications.each do |notification| %>
-        <%# リンク先を判定：Postならその投稿、Favoriteならいいねされた投稿へ %>
-        <% link_target = notification.notifiable_type == "Post" ? notification.notifiable : notification.notifiable.post %>
-        
-        <%= link_to post_path(link_target), class: "list-group-item list-group-item-action py-3" do %>
-          <div class="d-flex w-100 justify-content-between">
-            <h6 class="mb-1">
-              <strong>
-                <% if notification.notifiable_type == "Post" %>
-                  <%= notification.notifiable.user.name %>さんが投稿しました
-                <% elsif notification.notifiable_type == "Favorite" %>
-                  <%= notification.notifiable.user.name %>さんがあなたの投稿にいいねしました
-                <% end %>
-              </strong>
-            </h6>
-            <small class="text-muted"><%= l notification.created_at, format: :short %></small>
-          </div>
+        <%# 1. リンク先の投稿を安全に取得（ぼっち演算子でnil落ちを防止） %>
+        <% link_target = notification.notifiable_type == "Post" ? notification.notifiable : notification.notifiable&.post %>
 
-          <p class="mb-1 text-secondary">
-            <% if notification.notifiable_type == "Post" %>
-              「<%= notification.notifiable.title %>」
-            <% elsif notification.notifiable_type == "Favorite" %>
-              「<%= notification.notifiable.post.title %>」
-            <% end %>
-          </p>
+        <%# 2. link_target（投稿）と notification.notifiable（元データ）の両方が存在する場合のみ表示 %>
+        <% if notification.notifiable.present? && link_target.present? %>
+          
+          <%= link_to post_path(link_target), class: "list-group-item list-group-item-action py-3", data: { turbo: false, turbo_cache: false } do %>
+            <div class="d-flex w-100 justify-content-between">
+              <h6 class="mb-1">
+                <strong>
+                  <% if notification.notifiable_type == "Post" %>
+                    <%# &.user&.name でユーザーが削除されていてもエラーにしない %>
+                    <%= notification.notifiable.user&.name %>さんが投稿しました
+                  <% elsif notification.notifiable_type == "Favorite" %>
+                    <%= notification.notifiable.user&.name %>さんがあなたの投稿にいいねしました
+                  <% end %>
+                </strong>
+              </h6>
+              <small class="text-muted"><%= l notification.created_at, format: :short %></small>
+            </div>
+
+            <p class="mb-1 text-secondary">
+              <% if notification.notifiable_type == "Post" %>
+                「<%= notification.notifiable.title %>」
+              <% elsif notification.notifiable_type == "Favorite" %>
+                <%# ここも &. を使って安全にタイトルを取得 %>
+                「<%= notification.notifiable.post&.title %>」
+              <% end %>
+            </p>
+          <% end %>
+
+        <% else %>
+          <%# 3. データが欠けている場合のフォールバック（表示したくない場合はこのelseごと消してもOK） %>
+          <div class="list-group-item py-2 text-muted small bg-light">
+            削除されたコンテンツに関する通知です。
+          </div>
         <% end %>
+
       <% end %>
     <% else %>
       <div class="list-group-item text-center py-5 text-muted">通知はありません</div>
