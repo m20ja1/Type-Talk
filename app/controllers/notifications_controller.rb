@@ -2,8 +2,8 @@ class NotificationsController < ApplicationController
   before_action :require_authentication
 
   def index
-    @notifications = current_user.notifications.order(created_at: :desc)
-    @notifications.where(read: false).update_all(read: true)
+    @notifications = current_user.notifications.includes(:notifiable).order(created_at: :desc).to_a.compact_blank
+    @notifications.each { |n| n.update(read: true) if n.read == false }
   end
 
   def update

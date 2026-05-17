@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
 
+  # ゲストログイン
+  post "guest_sign_in", to: "guest_sessions#create", as: :guest_sign_in
+
   # 新規登録
   resources :users, only: [ :new, :create ], path_names: { new: "sign_up" }
 

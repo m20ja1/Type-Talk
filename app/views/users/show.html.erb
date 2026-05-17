@@ -27,15 +27,16 @@
         </div>
       </div>
 
-    <div class="align-self-start d-flex align-items-center">
-      <% if Current.user == @user %>
-        <%= link_to "編集", edit_user_path(@user), class: "btn btn-outline-secondary btn-sm px-4" %>
-      <% else %>
-        <%# --- 他人のページならフォローボタンを表示 --- %>
-        <%= render 'relationships/follow_button', user: @user %>
-      <% end %>
-    </div>
-    
+      <div class="align-self-start d-flex align-items-center">
+        <%# 「自分のページ」かつ「ゲストユーザーではない」場合のみ編集ボタンを表示 %>
+        <% if Current.user == @user && !@user.guest_user? %>
+          <%= link_to "編集", edit_user_path(@user), class: "btn btn-outline-secondary btn-sm px-4" %>
+        <% elsif Current.user != @user %>
+          <%# --- 自分以外のページならフォローボタンを表示 --- %>
+          <%= render 'relationships/follow_button', user: @user %>
+        <% end %>
+      </div>
+          
     </div>
   </div>
 
