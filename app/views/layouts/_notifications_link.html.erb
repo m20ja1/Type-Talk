@@ -7,8 +7,8 @@
         data: { bs_toggle: "dropdown", turbo: false }, 
         aria_expanded: "false" do %>
       
-      <i class="fa-solid fa-bell fa-sm " style="color: rgb(255, 212, 59);"></i> News
-      
+      <i class="fa-solid fa-bell fa-xs " style="color: rgb(255, 212, 59);"></i> News
+
       <% count = current_user.notifications.where(read: false).count %>
       <% if count > 0 %>
         <%# バッジをボタンの右上に少し被せる調整 %>
