@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   end
 
   # 通知機能
-  resources :notifications, only: [:index, :update]
+  resources :notifications, only: [ :index, :update ]
 
 
   get "up" => "rails/health#show", as: :rails_health_check

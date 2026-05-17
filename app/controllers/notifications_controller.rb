@@ -16,5 +16,4 @@ class NotificationsController < ApplicationController
       redirect_to user_path(notification.notifiable.user)
     end
   end
-
 end

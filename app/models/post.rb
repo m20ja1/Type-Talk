@@ -9,9 +9,9 @@ class Post < ApplicationRecord
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
 
-  # 通知機能アソシエーション
+   # 通知機能アソシエーション
    has_many :notifications, as: :notifiable, dependent: :destroy
-  
+
 
   # バリデーション
   validates :title, presence: true
@@ -50,7 +50,7 @@ class Post < ApplicationRecord
       end
     end
 
-    # 通知機能コールバック
+      # 通知機能コールバック
       after_create do
         user.followers.each do |follower|
           notifications.create(user_id: follower.id)

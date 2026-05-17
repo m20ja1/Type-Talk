@@ -16,5 +16,4 @@ class Favorite < ApplicationRecord
       notifiable: self
     )
   end
-
 end

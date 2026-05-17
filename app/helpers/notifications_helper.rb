@@ -1,5 +1,4 @@
 module NotificationsHelper
-
     def notification_message(notification)
       case notification.notifiable_type
       when "Book"
@@ -8,5 +7,4 @@ module NotificationsHelper
         "投稿した#{notification.notifiable.book.title}が#{notification.notifiable.user.name}さんにいいねされました"
       end
     end
-
 end
