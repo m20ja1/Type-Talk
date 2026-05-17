@@ -40,6 +40,22 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email_address, presence: true, uniqueness: true
 
+  # ゲストログイン機能
+  GUEST_USER_EMAIL = "guest@example.com"
+
+  def self.guest
+    find_or_create_by!(email_address: GUEST_USER_EMAIL) do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "ゲストユーザー"
+      user.mbti_type = "ENTP"
+    end
+  end
+
+  def guest_user?
+    email_address == GUEST_USER_EMAIL
+  end
+
+
     # 検索機能
     def self.looks(search, word)
       if search == "perfect_match"

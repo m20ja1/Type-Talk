@@ -28,7 +28,7 @@
       <% if notifications.any? %>
         <% notifications.each do |notification| %>
           <li>
-            <%= link_to post_path(notification.notifiable), class: "dropdown-item py-2 border-bottom", style: "white-space: normal;" do %>
+            <%= link_to posts_path(notification.notifiable), class: "dropdown-item py-2 border-bottom", style: "white-space: normal;" do %>
               <% if notification.notifiable_type == "Post" %>
                 <small class="d-block">
                   <strong><%= notification.notifiable.user.name %></strong>さんが投稿しました

@@ -11,6 +11,7 @@ class Post < ApplicationRecord
 
    # 通知機能アソシエーション
    has_many :notifications, as: :notifiable, dependent: :destroy
+   has_one :notification, as: :notifiable, dependent: :destroy
 
 
   # バリデーション
