@@ -102,7 +102,7 @@ comment_messages = [
 60.times do |i|
   commenter = users.sample # ランダムなユーザー
   target_post = posts.sample # ランダムな投稿
-  
+
   # 自分の投稿にはコメントしないルール（任意）
   next if commenter == target_post.user
 
