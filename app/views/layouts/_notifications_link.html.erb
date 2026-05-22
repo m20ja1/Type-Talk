@@ -1,5 +1,5 @@
 <% if current_user %>
-  <li class="nav-item dropdown d-inline-block ms-2"> <%# 他のボタンとの間隔を調整 %>
+  <li class="nav-item dropdown d-inline-block ms-2"> 
     <%= link_to "#", 
         class: "btn btn-outline-dark dropdown-toggle position-relative", 
         id: "navbarDropdown", 
@@ -9,9 +9,9 @@
       
       <i class="fa-solid fa-bell fa-xs " style="color: rgb(255, 212, 59);"></i> News
 
+    <%# 未読数を計算 %>
       <% count = current_user.notifications.where(read: false).count %>
       <% if count > 0 %>
-        <%# バッジをボタンの右上に少し被せる調整 %>
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
           <%= count %>
         </span>
@@ -23,6 +23,7 @@
         直近5件の未読通知
       </li>
       
+    <%# 最新情報のリストを取り出す %>
       <% notifications = current_user.notifications.where(read: false).order(created_at: :desc).limit(5) %>
       
       <% if notifications.any? %>
@@ -34,6 +35,11 @@
                   <strong><%= notification.notifiable.user.name %></strong>さんが投稿しました
                 </small>
                 <div class="text-truncate" style="max-width: 250px;"><%= notification.notifiable.title %></div>
+              <% end %>
+              <% if notification.notifiable_type == "Favorite" %>
+                <small class="d-block">
+                  <strong><%= notification.notifiable.user.name %></strong>さんがあなたの投稿にいいねしました
+                </small>
               <% end %>
               <div class="text-muted" style="font-size: 0.75rem;"><%= time_ago_in_words(notification.created_at) %>前</div>
             <% end %>
