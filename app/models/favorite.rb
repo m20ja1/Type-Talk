@@ -8,5 +8,4 @@ class Favorite < ApplicationRecord
   after_create do
     notifications.create(user: post.user)
   end
-
 end
