@@ -12,26 +12,26 @@ puts "Seedの実行を開始します..."
 
 # 1. ユーザーの作成 (20名)
 user_data = [
-  { name: "アリス", email: "alice@example.com", type: "ENFP", intro: "旅行と美味しいものが大好き！" },
-  { name: "ボブ", email: "bob@example.com", type: "ISTJ", intro: "プログラミング学習中。日々の記録を投稿します。" },
-  { name: "チャーリー", email: "charlie@example.com", type: "INFJ", intro: "映画や読書が趣味。静かな場所が好きです。" },
-  { name: "デイブ", email: "dave@example.com", type: "ENTP", intro: "新しい技術や議論が大好き！" },
-  { name: "イヴ", email: "eve@example.com", type: "ISFP", intro: "絵を描くことと植物を育てることが日課。" },
-  { name: "フランク", email: "frank@example.com", type: "ESTJ", intro: "効率的な仕事術と筋トレにハマっています。" },
-  { name: "グレース", email: "grace@example.com", type: "INFP", intro: "世界の不思議について考えるのが好き。" },
-  { name: "ハンス", email: "hans@example.com", type: "INTJ", intro: "長期的な戦略を立てるのが得意。チェスが好き。" },
-  { name: "アイビー", email: "ivy@example.com", type: "ENFJ", intro: "みんなで協力して何かを作るのが幸せ。" },
-  { name: "ジャック", email: "jack@example.com", type: "ISTP", intro: "バイクの修理とキャンプが趣味。道具を愛しています。" },
-  { name: "ケイト", email: "kate@example.com", type: "ESFJ", intro: "おもてなしの心を大切にしています。料理が得意。" },
-  { name: "レオ", email: "leo@example.com", type: "ESTP", intro: "考えるより先に動くタイプ！刺激的な毎日を。" },
-  { name: "ミア", email: "mia@example.com", type: "INTP", intro: "論理的な矛盾を見つけるとワクワクします。" },
-  { name: "ノア", email: "noah@example.com", type: "ENTJ", intro: "プロジェクトの指揮を執るのが得意です。" },
-  { name: "オリビア", email: "olivia@example.com", type: "ISFJ", intro: "周りの人のサポートに徹するのが私のスタイル。" },
-  { name: "ポール", email: "paul@example.com", type: "ESFP", intro: "人生はパーティー！楽しいことが一番。" },
-  { name: "クイン", email: "quinn@example.com", type: "ENFP", intro: "自由な発想を大切にしたいです。" },
-  { name: "ローズ", email: "rose@example.com", type: "INFJ", intro: "人の心の機微を理解しようと努めています。" },
-  { name: "サム", email: "sam@example.com", type: "ISTJ", intro: "コツコツと努力することが成功への近道。" },
-  { name: "タラ", email: "tara@example.com", type: "ENFJ", intro: "理想のコミュニティ作りを目指しています。" }
+  { name: "山田太郎", email: "yamada@example.com", type: "ENFP", intro: "旅行と美味しいものが大好き！" },
+  { name: "佐々木次郎", email: "sasaki@example.com", type: "ISTJ", intro: "プログラミング学習中。日々の記録を投稿します。" },
+  { name: "青木杏奈", email: "aoki@example.com", type: "INFJ", intro: "映画や読書が趣味。静かな場所が好きです。" },
+  { name: "中村健太", email: "nakamura@example.com", type: "ENTP", intro: "新しい技術や議論が大好き！" },
+  { name: "伊藤匠", email: "ito@example.com", type: "ISFP", intro: "絵を描くことと植物を育てることが日課。" },
+  { name: "渡辺陸", email: "watanabe@example.com", type: "ESTJ", intro: "効率的な仕事術と筋トレにハマっています。" },
+  { name: "小林悠斗", email: "kobayashi@example.com", type: "INFP", intro: "世界の不思議について考えるのが好き。" },
+  { name: "加藤陽太", email: "kato@example.com", type: "INTJ", intro: "長期的な戦略を立てるのが得意。チェスが好き。" },
+  { name: "石川樹", email: "ishikawa@example.com", type: "ENFJ", intro: "みんなで協力して何かを作るのが幸せ。" },
+  { name: "田中結衣", email: "tanaka@example.com", type: "ISTP", intro: "バイクの修理とキャンプが趣味。道具を愛しています。" },
+  { name: "木村美咲", email: "kimura@example.com", type: "ESFJ", intro: "おもてなしの心を大切にしています。料理が得意。" },
+  { name: "山本あおい", email: "yamamoto@example.com", type: "ESTP", intro: "考えるより先に動くタイプ！刺激的な毎日を。" },
+  { name: "斎藤凛", email: "saito@example.com", type: "INTP", intro: "論理的な矛盾を見つけるとワクワクします。" },
+  { name: "吉田陽菜", email: "yoshida@example.com", type: "ENTJ", intro: "プロジェクトの指揮を執るのが得意です。" },
+  { name: "長谷川理央", email: "hasegawa@example.com", type: "ISFJ", intro: "周りの人のサポートに徹するのが私のスタイル。" },
+  { name: "山口つむぎ", email: "yamaguchi@example.com", type: "ESFP", intro: "人生はパーティー！楽しいことが一番。" },
+  { name: "松本ほのか", email: "matumoto@example.com", type: "ENFP", intro: "自由な発想を大切にしたいです。" },
+  { name: "井上愛佳", email: "inoue@example.com", type: "INFJ", intro: "人の心の機微を理解しようと努めています。" },
+  { name: "藤野佑奈", email: "fujino@example.com", type: "ISTJ", intro: "コツコツと努力することが成功への近道。" },
+  { name: "テスト", email: "test@example.com", type: "ENFJ", intro: "理想のコミュニティ作りを目指しています。" }
 ]
 
 users = user_data.map do |data|
