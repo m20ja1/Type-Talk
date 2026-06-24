@@ -39,17 +39,17 @@ Rails.application.routes.draw do
 
   # 管理者用
   namespace :admin do
-    get "posts/index"
     get "users/index"
     get "homes/top"
     resource :session, only: [ :new, :create, :destroy ]
+    resources :posts, only: [:index, :show]
 
     # URL:/admin
     get "top" => "homes#top", as: :top
     root "homes#top"
 
     resources :users, only: [ :index, :show, :destroy ]
-    resources :posts, only: [ :index, :destroy ]
+    resources :posts, only: [ :index, :show, :destroy ]
   end
 
   # 通知機能

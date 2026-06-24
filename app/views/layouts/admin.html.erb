@@ -55,7 +55,6 @@
             <% if authenticated_admin? %>
               <%= link_to "ユーザー一覧", admin_users_path, class: "btn btn-light btn-sm px-3" %>
               <%= link_to "投稿一覧", admin_posts_path, class: "btn btn-light btn-sm px-3" %>
-              <%= link_to "ジャンル設定", admin_top_path, class: "btn btn-light btn-sm px-3" %>
               <%= link_to "ログアウト", admin_session_path, data: { turbo_method: :delete }, class: "btn btn-light btn-sm px-3" %>
             <% else %>
               <%= link_to "管理者ログイン", new_admin_session_path, class: "btn btn-light btn-sm px-3" %>

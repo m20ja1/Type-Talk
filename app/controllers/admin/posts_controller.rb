@@ -1,6 +1,11 @@
 class Admin::PostsController < Admin::ApplicationController
-def index
+  
+  def index
     @posts = Post.includes(:user).order(created_at: :desc)
+  end
+
+  def show
+    @post = Post.find(params[:id])
   end
 
   def destroy
@@ -8,4 +13,5 @@ def index
     post.destroy
     redirect_to admin_posts_path, notice: "投稿を削除しました"
   end
+
 end

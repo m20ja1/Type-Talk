@@ -11,7 +11,7 @@
           <tr>
             <th class="px-4">ID</th>
             <th>投稿者</th>
-            <th>内容</th>
+            <th>タイトル</th>
             <th>投稿日</th>
             <th class="text-center">操作</th>
           </tr>
@@ -24,13 +24,11 @@
                 <%= post.user.name %>
               </td>
               <td class="text-wrap" style="max-width: 400px;">
-                <%= truncate(post.body, length: 50) %>
+                <%= truncate(post.title, length: 50) %>
               </td>
               <td class="small text-muted"><%= l post.created_at, format: :short %></td>
               <td class="text-center">
-                <%= link_to "削除", admin_post_path(post), 
-                            data: { turbo_method: :delete, turbo_confirm: "この投稿を削除してもよろしいですか？" }, 
-                            class: "btn btn-outline-danger btn-sm rounded-pill px-3" %>
+                <%= link_to "詳細", admin_post_path(post), class: "btn btn-outline-danger btn-sm rounded-pill px-3" %>
               </td>
             </tr>
           <% end %>
