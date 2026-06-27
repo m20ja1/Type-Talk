@@ -1,5 +1,5 @@
 <h2 class="h5 fw-bold mb-4">
-        <%= action_name == 'followings' ? 'フォロー中' : 'フォロワー' %> (<%= @users.count %>)
+        <%= current_user.name %>さん<%= action_name == 'followings' ? 'がフォローしているユーザー' : 'をフォローしているユーザー' %>一覧 (<%= @users.count %>)
       </h2>
 
       <% if @users.any? %>
