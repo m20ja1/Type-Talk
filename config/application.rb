@@ -25,5 +25,10 @@ module TypeTalk
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.active_support.use_solid_cache = false
+
+    # 通知機能のタイムゾーン変更
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :local
+
   end
 end

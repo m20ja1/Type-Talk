@@ -1,4 +1,5 @@
 class Admin::UsersController < Admin::ApplicationController
+  
   def index
     @user = User.order(created_at: :desc)
     @users =User.all
