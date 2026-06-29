@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     get "users/index"
     get "homes/top"
     resource :session, only: [ :new, :create, :destroy ]
-    resources :posts, only: [:index, :show]
+    resources :posts, only: [ :index, :show ]
 
     # URL:/admin
     get "top" => "homes#top", as: :top

@@ -83,7 +83,7 @@ end
 
 def ensure_guest_user
    @user = User.find(params[:id])
-   if @user.email_address == "guest@example.com"
+   if @user.guest_user?
     redirect_to user_path(Current.user), notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
    end
   end

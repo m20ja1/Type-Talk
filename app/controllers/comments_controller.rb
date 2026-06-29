@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to post_path(@post), notice: "コメントを投稿しました"
     else
-      redirect_to post_path(@post), alart: "コメントの投稿に失敗しました"
+      redirect_to post_path(@post), alert: "コメントの投稿に失敗しました"
     end
   end
 
