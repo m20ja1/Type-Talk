@@ -15,8 +15,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user_id = Current.user.id
+    @post = Current.user.posts.new(post_params)
     if @post.save
       if params[:post][:tag_list].present?
         @post.save_tags(params[:post][:tag_list])
