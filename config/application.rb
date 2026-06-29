@@ -27,8 +27,7 @@ module TypeTalk
     config.active_support.use_solid_cache = false
 
     # 通知機能のタイムゾーン変更
-    config.time_zone = 'Tokyo'
+    config.time_zone = "Tokyo"
     config.active_record.default_timezone = :local
-
   end
 end

@@ -1,5 +1,4 @@
 class Admin::PostsController < Admin::ApplicationController
-  
   def index
     @posts = Post.includes(:user).order(created_at: :desc)
   end
@@ -13,5 +12,4 @@ class Admin::PostsController < Admin::ApplicationController
     post.destroy
     redirect_to admin_posts_path, notice: "投稿を削除しました"
   end
-
 end
