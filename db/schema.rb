@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_30_111123) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_30_112223) do
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email_address"
@@ -76,7 +76,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_30_111123) do
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.integer "admin_id"
+    t.bigint "admin_id"
     t.datetime "created_at", null: false
     t.string "ip_address"
     t.datetime "updated_at", null: false
