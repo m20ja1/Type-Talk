@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_17_034455) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_30_111123) do
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email_address"
@@ -46,7 +46,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_17_034455) do
     t.string "notifiable_type", null: false
     t.boolean "read", default: false, null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id"
     t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
